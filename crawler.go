@@ -1,8 +1,8 @@
 package main
 
 import (
-"fmt"
-"sync"
+	"fmt"
+	"sync"
 )
 
 //
@@ -15,6 +15,7 @@ import (
 //
 
 func Serial(url string, fetcher Fetcher, fetched map[string]bool) {
+
 	if fetched[url] {
 		return
 	}
@@ -81,11 +82,15 @@ func makeState() *fetchState {
 
 func worker(url string, ch chan []string, fetcher Fetcher) {
 	urls, err := fetcher.Fetch(url)
-	if err != nil {
-		ch <- []string{}
-	} else {
-		ch <- urls
-	}
+
+	defer func() {
+		if err != nil {
+			ch <- []string{}
+		} else {
+			ch <- urls
+		}
+	}()
+
 }
 
 func coordinator(ch chan []string, fetcher Fetcher) {

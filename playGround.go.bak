@@ -1,0 +1,16 @@
+//package main
+//
+//func main() {
+//	n_1 := 0
+//	n_2 := 1
+//
+//	f := func() int{
+//		n_1, n_2= n_2, n_1 + n_2
+//		return n_2
+//	}
+//
+//	for i:=0;i<10;i++{
+//		n_2 =100
+//		println(f())
+//	}
+//}
